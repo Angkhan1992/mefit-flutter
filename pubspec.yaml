@@ -1,0 +1,68 @@
+name: mefit
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  stacked: any
+  pigment: any
+  fluro: any
+  get: any
+  dio: any
+  provider: any
+  cached_network_image: any
+  flutter_svg: any
+  freezed_annotation: any
+  json_annotation: any
+  logger: any
+  shimmer: any
+  permission_handler: any
+  shared_preferences: any
+  intl: any
+  flutter_localizations:
+      sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: any
+  json_serializable: any
+  freezed: any
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/gym/
+    - assets/icons/
+
+  fonts:
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/SourceSansPro-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/SourceSansPro-Light.ttf
+          weight: 300
+        - asset: assets/fonts/SourceSansPro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/SourceSansPro-Semibold.ttf
+          weight: 600
+        - asset: assets/fonts/SourceSansPro-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/SourceSansPro-Black.ttf
+          weight: 900
+
+flutter_intl:
+  main_locale: en_US
+  enabled: true
