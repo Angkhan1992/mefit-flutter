@@ -1,1 +1,21 @@
-{}
+{
+    "appname" : "MeFit",
+    "to" : "to",
+    "with_" : "with",
+    "set_" : "Set",
+    "and_" : "and",
+    "confirm" : "Confirm",
+    "login" : "Login",    
+    "register" : "Register",
+    "password" : "Password",
+    "welcome" : "Welcome",
+    "google" : "Google",
+    "apple" : "Apple",
+    "first_name" : "First Name",
+    "last_name" : "Last Name",
+    "middle_name" : "Middle Name",
+    "email" : "Email",
+    "terms_agreement" : "Terms & Agreement ",
+    "privacy_policy" : "Privacy & Policy",
+    "address" : "Address"
+}

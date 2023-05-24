@@ -21,5 +21,27 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en_US';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "address": MessageLookupByLibrary.simpleMessage("Address"),
+        "and_": MessageLookupByLibrary.simpleMessage("and"),
+        "apple": MessageLookupByLibrary.simpleMessage("Apple"),
+        "appname": MessageLookupByLibrary.simpleMessage("MeFit"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
+        "google": MessageLookupByLibrary.simpleMessage("Google"),
+        "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "middle_name": MessageLookupByLibrary.simpleMessage("Middle Name"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "privacy_policy":
+            MessageLookupByLibrary.simpleMessage("Privacy & Policy"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "set_": MessageLookupByLibrary.simpleMessage("Set"),
+        "terms_agreement":
+            MessageLookupByLibrary.simpleMessage("Terms & Agreement "),
+        "to": MessageLookupByLibrary.simpleMessage("to"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "with_": MessageLookupByLibrary.simpleMessage("with")
+      };
 }

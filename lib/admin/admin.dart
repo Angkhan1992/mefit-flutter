@@ -9,7 +9,6 @@ import 'package:stacked/stacked.dart';
 
 import 'package:mefit/admin/export.dart';
 import 'package:mefit/core/core.dart';
-import 'package:mefit/generated/l10n.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -29,19 +28,30 @@ void main() async {
     Logger().e('Error: $details');
   };
 
-  runApp(const AdminWeb());
+  var profileVM = ProfileProvider();
+  await profileVM.fetchData();
+
+  runApp(AdminWeb(
+    isLogin: profileVM.user != null,
+  ));
 }
 
 final Navigation _navigation = Navigation();
 
 class AdminWeb extends StatelessWidget {
-  const AdminWeb({super.key});
+  final bool isLogin;
+  const AdminWeb({
+    super.key,
+    required this.isLogin,
+  });
 
   @override
   Widget build(BuildContext context) {
+    MTAdminTheme.initWithContext(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MeFitProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       child: ViewModelBuilder<MeFitProvider>.reactive(
         viewModelBuilder: () => MeFitProvider(),
@@ -50,7 +60,7 @@ class AdminWeb extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: vm.themeMode() ?? ThemeMode.system,
             theme: ThemeData(fontFamily: 'SourceSansPro'),
-            home: const LandingPage(),
+            home: isLogin ? const LandingPage() : const LoginPage(),
             onGenerateRoute: _navigation.router.generator,
             localizationsDelegates: const [
               S.delegate,

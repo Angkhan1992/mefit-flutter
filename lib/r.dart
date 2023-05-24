@@ -1,8 +1,10 @@
 class AssetImages {
   static const String imgExercise = 'assets/images/img_exercise.png';
   static const String imgFitness = 'assets/images/img_fitness.png';
+  static const String imgPlaceholder = 'assets/images/img_placeholder.svg';
   static const String imgWorkout = 'assets/images/img_workout.png';
   static const String imgYoga = 'assets/images/img_yoga.png';
+  static const String logoHorWhite = 'assets/images/logo_hor_white.svg';
 }
 
 class AssetGym {

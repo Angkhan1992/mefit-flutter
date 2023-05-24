@@ -15,7 +15,7 @@ class Navigation {
       handler: fluro.Handler(
         handlerFunc: (BuildContext? context, _) => const LandingPage(),
       ),
-      transitionType: fluro.TransitionType.native,
+      transitionType: fluro.TransitionType.none,
     );
 
     router.define(
@@ -23,7 +23,7 @@ class Navigation {
       handler: fluro.Handler(
         handlerFunc: (BuildContext? context, _) => const LoginPage(),
       ),
-      transitionType: fluro.TransitionType.native,
+      transitionType: fluro.TransitionType.none,
     );
   }
 

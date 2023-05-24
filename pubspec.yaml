@@ -26,6 +26,9 @@ dependencies:
   shimmer: any
   permission_handler: any
   shared_preferences: any
+  loading_indicator: any
+  fluttertoast: any
+
   intl: any
   flutter_localizations:
       sdk: flutter

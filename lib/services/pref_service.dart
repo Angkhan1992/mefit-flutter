@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 const keyTheme = 'app-theme';
+const keyToken = 'app-token';
 
 class PrefService {
   static PrefService? _preferenceService;
@@ -16,8 +17,18 @@ class PrefService {
     return prefs.getInt(keyTheme) ?? 0;
   }
 
-  Future<void> setTheme(int flag) async {
+  Future<bool> setTheme(int flag) async {
     final prefs = await _prefs;
-    await prefs.setInt(keyTheme, flag);
+    return await prefs.setInt(keyTheme, flag);
+  }
+
+  Future<String?> getToken() async {
+    final prefs = await _prefs;
+    return prefs.getString(keyToken);
+  }
+
+  Future<bool> setToken(String token) async {
+    final prefs = await _prefs;
+    return await prefs.setString(keyToken, token);
   }
 }
