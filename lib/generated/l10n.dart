@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `Email or Password was Empty!`
+  String get failed_email_password {
+    return Intl.message(
+      'Email or Password was Empty!',
+      name: 'failed_email_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Terms & Agreement `
   String get terms_agreement {
     return Intl.message(

@@ -10,19 +10,15 @@ class Navigation {
   }
 
   defineRoutes() {
-    router.define(
+    initRoute(
       '/landing',
-      handler: fluro.Handler(
-        handlerFunc: (BuildContext? context, _) => const LandingPage(),
-      ),
+      (props) => const LandingPage(),
       transitionType: fluro.TransitionType.none,
     );
 
-    router.define(
+    initRoute(
       '/login',
-      handler: fluro.Handler(
-        handlerFunc: (BuildContext? context, _) => const LoginPage(),
-      ),
+      (props) => const LoginPage(),
       transitionType: fluro.TransitionType.none,
     );
   }

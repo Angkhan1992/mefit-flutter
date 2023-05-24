@@ -14,18 +14,18 @@ class WebSliverAppBar extends SliverAppBar {
   }) : super(
           key: key,
           backgroundColor: MTAdminTheme.instance?.primary,
+          toolbarHeight: 72.0,
           leading: Container(),
           pinned: true,
           title: Container(
             padding: const EdgeInsets.symmetric(
-              vertical: 16.0,
               horizontal: 24.0,
             ),
             child: Row(
               children: [
                 const MTImage(
                   R.AssetImages.logoHorWhite,
-                  height: 40.0,
+                  height: 32.0,
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),

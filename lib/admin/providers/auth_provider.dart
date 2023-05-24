@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:mefit/admin/export.dart';
 import 'package:mefit/core/core.dart';
+import 'package:mefit/services/services.dart';
 
 class AuthProvider extends MFBaseViewModel {
   @override
@@ -14,6 +16,9 @@ class AuthProvider extends MFBaseViewModel {
 
   bool _isLogin = true;
   bool get isLogin => _isLogin;
+
+  bool _loadingLogin = false;
+  bool get loadingLogin => _loadingLogin;
 
   Widget get content {
     return CustomScrollView(
@@ -35,7 +40,7 @@ class AuthProvider extends MFBaseViewModel {
                   color: MTAdminTheme.instance?.onPrimay.withOpacity(0.75),
                   borderRadius: BorderRadius.circular(24.0),
                 ),
-                child: _isLogin ? _loginView : _registerView,
+                child: _isLogin ? LoginView(vm: this) : _registerView,
               ),
             ),
           ]),
@@ -45,70 +50,46 @@ class AuthProvider extends MFBaseViewModel {
   }
 
   bool _isPassword = true;
-  Widget get _loginView => Column(
-        children: [
-          Text(
-            '${S.current.welcome} ${S.current.to} ${S.current.appname}'
-                .toUpperCase(),
-            style: MTAdminTheme.instance?.headerTitle,
-          ),
-          const SizedBox(height: 40.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${S.current.email} ${S.current.address} *',
-                prefixIcon: const Icon(Icons.email),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              obscureText: _isPassword,
-              decoration: InputDecoration(
-                labelText: '${S.current.password} *',
-                prefixIcon: const Icon(Icons.key),
-                suffixIcon: InkWell(
-                  onTap: () {
-                    _isPassword = !_isPassword;
-                    notifyListeners();
-                  },
-                  child: _isPassword
-                      ? const Icon(Icons.lock)
-                      : const Icon(Icons.lock_open),
-                ),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 40.0),
-          MTButton(
-            // isLoading: true,
-            title: S.current.login.toUpperCase(),
-            onTap: () {},
-          ),
-          const SizedBox(height: 40.0),
-          Text(
-            '${S.current.login} ${S.current.with_}'.toUpperCase(),
-            style: MTAdminTheme.instance?.appBarSubTitle,
-          ),
-          const SizedBox(height: 24.0),
-          MTButton(
-            title: '${S.current.login} ${S.current.with_} ${S.current.google}',
-            background: Colors.redAccent,
-            onTap: () {},
-          ),
-          const SizedBox(height: 8.0),
-          MTButton(
-            title: '${S.current.login} ${S.current.with_} ${S.current.apple}',
-            background: Colors.black,
-            onTap: () {},
-          ),
-        ],
-      );
+  bool get isPassword => _isPassword;
+  void updatePassword() {
+    _isPassword = !_isPassword;
+    notifyListeners();
+  }
+
+  String loginEmail = '';
+  String loginPassword = '';
+
+  Future<void> onLogin() async {
+    if (loginEmail.isEmpty || loginPassword.isEmpty) {
+      return;
+    }
+    clearErrors();
+
+    _loadingLogin = true;
+    notifyListeners();
+
+    await runBusyFuture(() async {
+      try {
+        var resp = await MFAdminAPI.login({
+          'email': loginEmail,
+          'password': loginPassword,
+        });
+        if (resp.isSuccessful && resp.code == 200) {
+          await PrefService.instance.setToken(resp.data);
+        } else {
+          setError(resp.code == 201 ? resp.data : resp.message);
+        }
+      } catch (e) {
+        Logger().e(e);
+        setError(e);
+      } finally {
+        notifyListeners();
+      }
+    }());
+
+    _loadingLogin = false;
+    notifyListeners();
+  }
 
   bool _isSetPassword = true;
   bool _isConPassword = true;

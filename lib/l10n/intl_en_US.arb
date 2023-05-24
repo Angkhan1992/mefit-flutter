@@ -15,6 +15,7 @@
     "last_name" : "Last Name",
     "middle_name" : "Middle Name",
     "email" : "Email",
+    "failed_email_password" : "Email or Password was Empty!",
     "terms_agreement" : "Terms & Agreement ",
     "privacy_policy" : "Privacy & Policy",
     "address" : "Address"

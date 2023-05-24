@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appname": MessageLookupByLibrary.simpleMessage("MeFit"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "failed_email_password": MessageLookupByLibrary.simpleMessage(
+            "Email or Password was Empty!"),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
