@@ -82,11 +82,8 @@ class NetworkService {
             options.headers['Authorization'] = token;
           }
 
-          options.headers['Platform'] = kIsWeb
-              ? 'WEB'
-              : Platform.isIOS
-                  ? 'IOS'
-                  : 'ANDROID';
+          options.headers['Platform'] =
+              kIsWeb ? 'WEB' : Platform.operatingSystem;
           Logger().d(
             '[NETWORK] Request with headers: ${options.headers}',
           );
@@ -115,9 +112,7 @@ class NetworkService {
 
     Response response = await dio.request(
       path,
-      data: kQueryJson(postParams) != null
-          ? FormData.fromMap(kQueryJson(postParams)!)
-          : {},
+      data: kQueryJson(postParams) ?? {},
       options: Options(method: method),
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

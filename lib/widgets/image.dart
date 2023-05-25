@@ -22,7 +22,7 @@ class MFDefaultImage extends StatelessWidget {
       width: width,
       height: height,
       color: Colors.grey,
-      child: Image.asset(
+      child: SvgPicture.asset(
         R.AssetImages.imgPlaceholder,
         width: width,
         height: height,

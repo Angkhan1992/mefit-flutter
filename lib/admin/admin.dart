@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:mefit/services/pref_service.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
@@ -28,11 +29,9 @@ void main() async {
     Logger().e('Error: $details');
   };
 
-  var profileVM = ProfileProvider();
-  await profileVM.fetchData();
-
+  var token = await PrefService.instance.getToken();
   runApp(AdminWeb(
-    isLogin: profileVM.user != null,
+    isLogin: token != null,
   ));
 }
 

@@ -13,6 +13,7 @@ class UserModel with _$UserModel {
     String? id,
     String? firstName,
     String? lastName,
+    String? avatar,
     String? onMember,
     String? expiredDate,
     String? desc,

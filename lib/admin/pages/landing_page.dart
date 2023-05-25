@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mefit/admin/export.dart';
-import 'package:mefit/r.dart' as R;
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -12,26 +9,48 @@ class LandingPage extends StatelessWidget {
     return MTWebBaseView<LandingProvider>(
       viewModelBuilder: () => LandingProvider(),
       onViewModelReady: (vm) => vm.init(context),
-      stBuilder: (context, app, vm, _) => Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(
-              R.AssetImages.imgExercise,
+      stBuilder: (context, app, vm, _) {
+        return CustomScrollView(
+          controller: vm.controller,
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            WebSliverAppBar(
+              context,
+              user: vm.user,
             ),
-          ),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: CustomScrollView(
-            slivers: [
-              WebSliverAppBar(
-                context,
-              ),
-            ],
-          ),
-        ),
-      ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 24.0),
+                      constraints: const BoxConstraints(maxWidth: 1200.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: LandingMenuView(vm: vm),
+                          ),
+                          const SizedBox(width: 16.0),
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              padding: const EdgeInsets.all(24.0),
+                              child: vm.contentView,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+          ],
+        );
+      },
       hasLoading: false,
     );
   }

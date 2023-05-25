@@ -27,22 +27,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "apple": MessageLookupByLibrary.simpleMessage("Apple"),
         "appname": MessageLookupByLibrary.simpleMessage("MeFit"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "course": MessageLookupByLibrary.simpleMessage("Course"),
+        "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "failed_email_password": MessageLookupByLibrary.simpleMessage(
-            "Email or Password was Empty!"),
+            "The input fields are not filled yet. Please fill first!"),
+        "failed_match_password":
+            MessageLookupByLibrary.simpleMessage("Password was not matched!"),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "middle_name": MessageLookupByLibrary.simpleMessage("Middle Name"),
+        "new_": MessageLookupByLibrary.simpleMessage("New"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy & Policy"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "set_": MessageLookupByLibrary.simpleMessage("Set"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "support": MessageLookupByLibrary.simpleMessage("Support"),
         "terms_agreement":
             MessageLookupByLibrary.simpleMessage("Terms & Agreement "),
         "to": MessageLookupByLibrary.simpleMessage("to"),
+        "user_account": MessageLookupByLibrary.simpleMessage("User Account"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "with_": MessageLookupByLibrary.simpleMessage("with")
       };

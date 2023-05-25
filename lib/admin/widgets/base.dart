@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:mefit/admin/export.dart';
 import 'package:mefit/core/core.dart';
 import 'package:stacked/stacked.dart';
 
@@ -87,21 +88,16 @@ class MTLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.black45,
-      child: const Center(
-        child: SizedBox(
-          width: 150.0,
-          height: 150.0,
-          child: LoadingIndicator(
-            indicatorType: Indicator.ballClipRotateMultiple,
-            colors: [Colors.white],
-            strokeWidth: 2,
-            backgroundColor: Colors.transparent,
-            pathBackgroundColor: Colors.transparent,
-          ),
+    return Center(
+      child: SizedBox(
+        width: 150.0,
+        height: 150.0,
+        child: LoadingIndicator(
+          indicatorType: Indicator.ballClipRotateMultiple,
+          colors: [MTAdminTheme.instance!.primary],
+          strokeWidth: 2,
+          backgroundColor: Colors.transparent,
+          pathBackgroundColor: Colors.transparent,
         ),
       ),
     );

@@ -16,6 +16,7 @@ class MTAdminTheme {
   static MTAdminTheme? _mtAdminTheme;
   static MTAdminTheme? get instance => _mtAdminTheme;
 
+  ColorScheme get colorScheme => Theme.of(context).colorScheme;
   Color get primary => Theme.of(context).colorScheme.primary;
   Color get onPrimay => Theme.of(context).colorScheme.onPrimary;
   Color get secondary => Theme.of(context).colorScheme.secondary;
@@ -32,11 +33,20 @@ class MTAdminTheme {
 
   TextStyle get appBarTitle => const TextStyle(
         fontSize: 22.0,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w600,
       );
 
-  TextStyle get appBarSubTitle => const TextStyle(
+  TextStyle get subTitle => const TextStyle(
         fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+      );
+
+  TextStyle get cardTitle => const TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w300,
+      );
+  TextStyle get cardContent => const TextStyle(
+        fontSize: 18.0,
         fontWeight: FontWeight.w600,
       );
 }

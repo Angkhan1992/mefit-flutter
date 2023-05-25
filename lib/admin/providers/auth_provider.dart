@@ -16,6 +16,20 @@ class AuthProvider extends MFBaseViewModel {
 
   bool _isLogin = true;
   bool get isLogin => _isLogin;
+  void changePage(bool flag) {
+    _isLogin = flag;
+
+    loginEmail = '';
+    loginPassword = '';
+
+    registerFirstName = '';
+    registerLastName = '';
+    registerEmail = '';
+    registerNPassword = '';
+    registerCPassword = '';
+
+    notifyListeners();
+  }
 
   bool _loadingLogin = false;
   bool get loadingLogin => _loadingLogin;
@@ -25,10 +39,7 @@ class AuthProvider extends MFBaseViewModel {
       slivers: [
         WebSliverAppBar(
           context,
-          onAuthTap: (isLogin) {
-            _isLogin = isLogin;
-            notifyListeners();
-          },
+          onAuthTap: changePage,
         ),
         SliverList(
           delegate: SliverChildListDelegate([
@@ -40,7 +51,7 @@ class AuthProvider extends MFBaseViewModel {
                   color: MTAdminTheme.instance?.onPrimay.withOpacity(0.75),
                   borderRadius: BorderRadius.circular(24.0),
                 ),
-                child: _isLogin ? LoginView(vm: this) : _registerView,
+                child: _isLogin ? LoginView(vm: this) : RegisterView(vm: this),
               ),
             ),
           ]),
@@ -61,6 +72,7 @@ class AuthProvider extends MFBaseViewModel {
 
   Future<void> onLogin() async {
     if (loginEmail.isEmpty || loginPassword.isEmpty) {
+      setError(S.current.failed_email_password);
       return;
     }
     clearErrors();
@@ -70,7 +82,7 @@ class AuthProvider extends MFBaseViewModel {
 
     await runBusyFuture(() async {
       try {
-        var resp = await MFAdminAPI.login({
+        var resp = await MFAdminAPI.loginAdmin({
           'email': loginEmail,
           'password': loginPassword,
         });
@@ -92,120 +104,70 @@ class AuthProvider extends MFBaseViewModel {
   }
 
   bool _isSetPassword = true;
+  bool get isSetPassword => _isSetPassword;
+  void updateSetPassword() {
+    _isSetPassword = !_isSetPassword;
+    notifyListeners();
+  }
+
   bool _isConPassword = true;
-  Widget get _registerView => Column(
-        children: [
-          Text(
-            '${S.current.register} ${S.current.to} ${S.current.appname}'
-                .toUpperCase(),
-            style: MTAdminTheme.instance?.headerTitle,
-          ),
-          const SizedBox(height: 40.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${S.current.first_name} *',
-                prefixIcon: const Icon(Icons.account_circle),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${S.current.last_name} *',
-                prefixIcon: const Icon(Icons.account_circle),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${S.current.email} ${S.current.address} *',
-                prefixIcon: const Icon(Icons.email),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              obscureText: _isSetPassword,
-              decoration: InputDecoration(
-                labelText: '${S.current.set_} ${S.current.password} *',
-                prefixIcon: const Icon(Icons.key),
-                suffixIcon: InkWell(
-                  onTap: () {
-                    _isSetPassword = !_isSetPassword;
-                    notifyListeners();
-                  },
-                  child: _isSetPassword
-                      ? const Icon(Icons.lock)
-                      : const Icon(Icons.lock_open),
-                ),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24.0),
-          SizedBox(
-            width: 400.0,
-            child: TextFormField(
-              obscureText: _isConPassword,
-              decoration: InputDecoration(
-                labelText: '${S.current.confirm} ${S.current.password} *',
-                prefixIcon: const Icon(Icons.key),
-                suffixIcon: InkWell(
-                  onTap: () {
-                    _isConPassword = !_isConPassword;
-                    notifyListeners();
-                  },
-                  child: _isConPassword
-                      ? const Icon(Icons.lock)
-                      : const Icon(Icons.lock_open),
-                ),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 40.0),
-          MTButton(
-            title: S.current.register.toUpperCase(),
-            onTap: () {},
-          ),
-          const SizedBox(height: 40.0),
-          RichText(
-            text: TextSpan(
-              text: S.current.terms_agreement,
-              style: TextStyle(
-                color: MTAdminTheme.instance?.primary,
-                decoration: TextDecoration.underline,
-              ),
-              children: [
-                TextSpan(
-                  text: '      ',
-                  style: TextStyle(
-                    color: MTAdminTheme.instance?.primary,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                TextSpan(
-                  text: S.current.privacy_policy,
-                  style: TextStyle(
-                    color: MTAdminTheme.instance?.primary,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
+  bool get isConPassword => _isConPassword;
+  void updateConPassword() {
+    _isConPassword = !_isConPassword;
+    notifyListeners();
+  }
+
+  String registerFirstName = '';
+  String registerLastName = '';
+  String registerEmail = '';
+  String registerNPassword = '';
+  String registerCPassword = '';
+
+  bool _loadingRegister = false;
+  bool get loadingRegister => _loadingRegister;
+
+  Future<void> onRegister() async {
+    if (registerFirstName.isEmpty ||
+        registerLastName.isEmpty ||
+        registerEmail.isEmpty ||
+        registerNPassword.isEmpty ||
+        registerCPassword.isEmpty) {
+      setError(S.current.failed_email_password);
+      return;
+    }
+    if (registerCPassword != registerNPassword) {
+      setError(S.current.failed_match_password);
+      return;
+    }
+    clearErrors();
+
+    _loadingRegister = true;
+    notifyListeners();
+
+    await runBusyFuture(() async {
+      try {
+        var resp = await MFAdminAPI.register({
+          'first_name': registerFirstName,
+          'last_name': registerLastName,
+          'email': registerEmail,
+          'password': registerNPassword,
+          'role': 'ADMIN',
+          'is_blocked': false,
+        });
+        if (resp.isSuccessful && resp.code == 200) {
+          await PrefService.instance.setToken(resp.data);
+        } else {
+          setError(resp.code == 201 ? resp.data : resp.message);
+        }
+      } catch (e) {
+        Logger().e(e);
+        setError(e);
+      } finally {
+        notifyListeners();
+      }
+    }());
+
+    _loadingRegister = false;
+    notifyListeners();
+  }
 }

@@ -30,30 +30,29 @@ class WebSliverAppBar extends SliverAppBar {
                 ),
                 const Spacer(),
                 if (user != null) ...{
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: MTAdminTheme.instance?.primary,
-                    ),
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      (user.role == 'DEVELOPER') ? 'D' : 'A',
-                      style: MTAdminTheme.instance?.appBarTitle,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16.0),
+                    child: MTImage(
+                      user.avatar,
+                      width: 32.0,
+                      height: 32.0,
                     ),
                   ),
                   const SizedBox(width: 16.0),
                   Text(
                     user.shortName,
-                    style: MTAdminTheme.instance?.appBarSubTitle,
+                    style: MTAdminTheme.instance?.subTitle,
                   ),
                 } else ...{
                   Row(
                     children: [
                       InkWell(
-                        onTap: () => onAuthTap!(true),
+                        onTap: () {
+                          if (onAuthTap != null) onAuthTap(true);
+                        },
                         child: Text(
                           S.current.login.toUpperCase(),
-                          style: MTAdminTheme.instance?.appBarSubTitle,
+                          style: MTAdminTheme.instance?.subTitle,
                         ),
                       ),
                       Container(
@@ -63,10 +62,12 @@ class WebSliverAppBar extends SliverAppBar {
                         color: MTAdminTheme.instance?.onPrimay,
                       ),
                       InkWell(
-                        onTap: () => onAuthTap!(false),
+                        onTap: () {
+                          if (onAuthTap != null) onAuthTap(false);
+                        },
                         child: Text(
                           S.current.register.toUpperCase(),
-                          style: MTAdminTheme.instance?.appBarSubTitle,
+                          style: MTAdminTheme.instance?.subTitle,
                         ),
                       ),
                     ],

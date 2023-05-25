@@ -90,6 +90,16 @@ class S {
     );
   }
 
+  /// `New`
+  String get new_ {
+    return Intl.message(
+      'New',
+      name: 'new_',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `and`
   String get and_ {
     return Intl.message(
@@ -105,6 +115,56 @@ class S {
     return Intl.message(
       'Confirm',
       name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dashboard`
+  String get dashboard {
+    return Intl.message(
+      'Dashboard',
+      name: 'dashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Account`
+  String get user_account {
+    return Intl.message(
+      'User Account',
+      name: 'user_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course`
+  String get course {
+    return Intl.message(
+      'Course',
+      name: 'course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support`
+  String get support {
+    return Intl.message(
+      'Support',
+      name: 'support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
       desc: '',
       args: [],
     );
@@ -210,11 +270,21 @@ class S {
     );
   }
 
-  /// `Email or Password was Empty!`
+  /// `The input fields are not filled yet. Please fill first!`
   String get failed_email_password {
     return Intl.message(
-      'Email or Password was Empty!',
+      'The input fields are not filled yet. Please fill first!',
       name: 'failed_email_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password was not matched!`
+  String get failed_match_password {
+    return Intl.message(
+      'Password was not matched!',
+      name: 'failed_match_password',
       desc: '',
       args: [],
     );
